@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.LectureMapper">
+	<!-- sql문이 작성되는 공간 -->
+	<!-- 강의 목록 전체 조회 -->
+	<select id="getList"
+		resultType="com.example.demo.dto.LectureDTO">
+		SELECT *
+		FROM lecture
+		LIMIT #{pageSize} OFFSET #{offset}
+
+	</select>
+
+	<!-- 총 데이터 개수 가져오기 -->
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		lecture
+	</select>
+
+	<!-- 조회 버튼을 통해 검색 -->
+	<!-- <select id="findLectures"
+		resultType="com.example.demo.dto.LectureDTO">
+		SELECT lectureid,lectname, lectcategory, department, grade, classroom,
+		professorname, timetable
+		FROM lecture
+		WHERE 1=1
+		<if test="issueCategory != null and issueCategory != ''">
+			AND lectcategory = #{issueCategory}
+		</if>
+		<if test="courseName != null and courseName != ''">
+			AND lectname LIKE CONCAT('%', #{courseName}, '%')
+		</if>
+		<if test="department != null and department != ''">
+			AND department = #{department}
+		</if>
+		<if test="targetYear != null and targetYear != ''">
+			AND grade = #{targetYear}
+		</if>
+		<if test="classroom != null and classroom != ''">
+			AND classroom = #{classroom}
+		</if>
+		<if test="professorName != null and professorName != ''">
+			AND professorname LIKE CONCAT('%', #{professorName}, '%')
+		</if>
+		LIMIT #{pageSize} OFFSET #{offset}
+	</select>
+	-->
+	<select id="findLectures" resultMap="lectureResultMap">
+    SELECT lectureid, lectname, grade, department, classroom, timetable, lectcategory, professorname
+    FROM lecture
+    WHERE 1=1
+		<if test="issueCategory != null and issueCategory != ''">
+			AND lectcategory = #{issueCategory}
+		</if>
+		<if test="courseName != null and courseName != ''">
+			AND lectname=#{courseName}
+		</if>
+		<if test="department != null and department != ''">
+			AND department = #{department}
+		</if>
+		<if test="targetYear != null and targetYear != ''">
+			AND grade = #{targetYear}
+		</if>
+		<if test="classroom != null and classroom != ''">
+			AND classroom = #{classroom}
+		</if>
+		<if test="professorName != null and professorName != ''">
+			AND professorname =#{professorName}
+		</if>
+    LIMIT #{offset}, #{pageSize}
+</select>
+
+<resultMap id="lectureResultMap" type="com.example.demo.dto.LectureDTO">
+    <id property="lectureid" column="lectureid"/>
+    <result property="lectname" column="lectname"/>
+    <result property="grade" column="grade"/>
+    <result property="department" column="department"/>
+    <result property="classroom" column="classroom"/>
+    <result property="timetable" column="timetable"/>
+    <result property="lectcategory" column="lectcategory"/>
+    <result property="professorname" column="professorname"/>
+</resultMap>
+	
+	<!-- 검색 결과 총 개수 -->
+	<!-- lecture-mapper.xml -->
+	<select id="countLectures" resultType="int">
+		SELECT COUNT(*)
+		FROM lecture
+		WHERE 1=1
+		<if test="issueCategory != null and issueCategory != ''">
+			AND lectcategory = #{issueCategory}
+		</if>
+		<if test="courseName != null and courseName != ''">
+			AND lectname LIKE CONCAT('%', #{courseName}, '%')
+		</if>
+		<if test="department != null and department != ''">
+			AND department = #{department}
+		</if>
+		<if test="targetYear != null and targetYear != ''">
+			AND grade = #{targetYear}
+		</if>
+		<if test="classroom != null and classroom != ''">
+			AND classroom = #{classroom}
+		</if>
+		<if test="professorName != null and professorName != ''">
+			AND professorname LIKE CONCAT('%', #{professorName}, '%')
+		</if>
+	</select>
+
+	<!-- 검색 조건에 따른 총 개수 -->
+	<select id="getTotalCountForSearch" resultType="int">
+		SELECT COUNT(*)
+		FROM lecture
+		WHERE 1=1
+		<if test="issueCategory != null and issueCategory != ''">
+			AND lectcategory = #{issueCategory}
+		</if>
+		<if test="courseName != null and courseName != ''">
+			AND lectname LIKE CONCAT('%', #{courseName}, '%')
+		</if>
+		<if test="department != null and department != ''">
+			AND department = #{department}
+		</if>
+		<if test="targetYear != null and targetYear != ''">
+			AND grade = #{targetYear}
+		</if>
+		<if test="classroom != null and classroom != ''">
+			AND classroom = #{classroom}
+		</if>
+		<if test="professorName != null and professorName != ''">
+			AND professorname LIKE CONCAT('%', #{professorName}, '%')
+		</if>
+	</select>
+
+	<!-- 수강 신청 -->
+	<insert id="registerCourse">
+		INSERT INTO take_class (userid, lectureid)
+		VALUES
+		(#{userid}, #{lectureid});
+	</insert>
+	<select id="getRegisteredLectures"
+		resultType="com.example.demo.dto.LectureDTO">
+		SELECT l.lectname, l.lectcategory, l.department, l.grade, l.classroom,
+		l.professorname, l.timetable
+		FROM lecture l
+		JOIN take_class t ON l.lectureid = t.lectureid
+		WHERE t.userid = #{userId}
+	</select>
+
+
+
+
+</mapper>

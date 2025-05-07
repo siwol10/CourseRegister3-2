@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+
+<head>
+	<title> Main 페이지 </title>
+</head>
+
+<body>
+	<th:block layout:fragment="content">
+		<div class="container2">
+			<div class="left-side">
+				<table border="0">
+					<thead>
+						<tr>
+							<th colspan="4">2024년 수강신청</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>이름</td>
+							<td class="line" th:text="${user.username}">이름</td>
+							<td>학과</td>
+							<td th:text="${user.department}">학과</td>
+						</tr>
+						<tr>
+							<td>학년</td>
+							<td class="line" th:text="${user.grade}">학년</td>
+							<td>학기</td>
+							<td>2</td>
+						</tr>
+						<tr>
+							<td colspan="2">신청가능학점</td>
+							<td colspan="2">21</td>
+						</tr>
+					</tbody>
+				</table>
+				<div id="blank2"></div>
+				<div class="notice">NOTICE</div>
+				<div class="notice-line"></div>
+				<ul class="notice-list" style="list-style-type:disc">
+					<li><a href="https://www.kongju.ac.kr/bbs/kongju/1521/298997/artclView.do">2024년 2학기 수강신청 일정 등
+							안내</a></li>
+					<li><a
+							href="https://www.kongju.ac.kr/KNU/16909/subview.do?enc=Zm5jdDF8QEB8JTJGYmJzJTJGS05VJTJGMjEzMiUyRjM2ODYzOCUyRmFydGNsVmlldy5kbyUzRnBhZ2UlM0QxJTI2c3JjaENvbHVtbiUzRHNqJTI2c3JjaFdyZCUzRCVFQyU4OCU5OCVFQSVCMCU5NSUyNmJic0NsU2VxJTNEJTI2YmJzT3BlbldyZFNlcSUzRCUyNnJnc0JnbmRlU3RyJTNEJTI2cmdzRW5kZGVTdHIlM0QlMjZpc1ZpZXdNaW5lJTNEZmFsc2UlMjZwYXNzd29yZCUzRCUyNg%3D%3D">2학기
+							1차 폐강 교과목 알림 및 폐강 과목 수강신청 대상자 수강신청 안내</a></li>
+
+					<li><a
+							href="https://www.kongju.ac.kr/KNU/16909/subview.do?enc=Zm5jdDF8QEB8JTJGYmJzJTJGS05VJTJGMjEzMiUyRjM2ODYzNSUyRmFydGNsVmlldy5kbyUzRnBhZ2UlM0QyJTI2c3JjaENvbHVtbiUzRHNqJTI2c3JjaFdyZCUzRCVFQyU4OCU5OCVFQSVCMCU5NSUyNmJic0NsU2VxJTNEJTI2YmJzT3BlbldyZFNlcSUzRCUyNnJnc0JnbmRlU3RyJTNEJTI2cmdzRW5kZGVTdHIlM0QlMjZpc1ZpZXdNaW5lJTNEZmFsc2UlMjZwYXNzd29yZCUzRCUyNg%3D%3D">2학기
+							학부생 수강신청 최종변경 및 수강포기 안내</a></li>
+
+				</ul>
+			</div>
+			<div class="right-side">
+				<div class="regist-sched">[수강신청 일정]</div>
+				<table border="1">
+					<thead>
+						<tr>
+							<th>구 분</th>
+							<th>대상 학년</th>
+							<th>수강신청 기간</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td rowspan="7">학부 재학생(진급예정자, 복학예정자, 재입학생)</td>
+							<td>예비 수강신청(장바구니)</td>
+							<td> 24. 8. 1.(목) ~ 8. 2.(금) 일자별 09:00 ~ 18:00</td>
+						</tr>
+						<tr>
+							<td> 장애학생 및 특수교육대상자 전형 입학자</td>
+							<td>24. 8. 5.(월) 14:00 ~ 18:00</td>
+						</tr>
+						<tr>
+							<td>4학년(초과학기자 포함)</td>
+							<td>24. 8. 6.(화) 08:30 ~ 18:00</td>
+						</tr>
+						<tr>
+							<td>3학년</td>
+							<td>24. 8. 7.(수) 08:30 ~ 18:00</td>
+						</tr>
+						<tr>
+							<td>2학년</td>
+							<td>24. 8. 8.(목) 08:30 ~ 18:00</td>
+						</tr>
+						<tr>
+							<td>1학년</td>
+							<td>24. 8. 9.(금) 08:30 ~ 18:00</td>
+						</tr>
+						<tr>
+							<td>미 수강 신청자</td>
+							<td>24. 8. 12.(월) 08:30 ~ 18:00</td>
+						</tr>
+						<tr>
+							<td colspan="2">수강 신청 최종 변경</td>
+							<td> 24. 9. 3.(화) ~ 9. 6.(금)
+								일자별 09:00 ~ 18:00</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</th:block>
+</body>
+
+</html>

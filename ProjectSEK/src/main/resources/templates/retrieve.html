@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+
+<head>
+	<title> 조회 페이지 </title>
+</head>
+
+<body>
+	<th:block layout:fragment="content">
+		<div class="retrieve-button-group">
+			<button class="retrieve-button">개설과목조회</button>
+		</div>
+		<div class="retrieve-search-group">
+			<form th:action="@{/retrieve}" method="post">
+				<div class="form-item">
+					<label for="issue-category">이수구분</label>
+					<input type="text" id="issue-category" name="issueCategory">
+				</div>
+
+				<div class="form-item">
+					<label for="course-name">과목명</label>
+					<input type="text" id="course-name" name="lectname">
+				</div>
+
+				<div class="form-item">
+					<label for="department">학과</label>
+					<input type="text" id="department" name="department">
+				</div>
+
+				<div class="form-item">
+					<label for="target-year">대상학년</label>
+					<input type="text" id="target-year" name="targetYear">
+				</div>
+
+				<div class="form-item">
+					<label for="classroom">강의실</label>
+					<input type="text" id="classroom" name="classroom">
+				</div>
+
+				<div class="form-item">
+					<label for="professorname">교수명</label>
+					<input type="text" id="professorname" name="professorName">
+				</div>
+
+				<button type="submit">조회</button>
+			</form>
+
+
+		</div>
+		<div class="retrieve-search-table">
+			<table border="1">
+				<thead>
+					<tr>
+						<th>과목명</th>
+						<th>이수구분</th>
+						<th>학과</th>
+						<th>대상학년</th>
+						<th>강의실</th>
+						<th>교수명</th>
+						<th>시간표</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="lecture : ${lectureList}">
+						<td th:text="${lecture.lectname}"></td>
+						<td th:text="${lecture.lectcategory}"></td>
+						<td th:text="${lecture.department}"></td>
+						<td th:text="${lecture.grade}"></td>
+						<td th:text="${lecture.classroom}"></td>
+						<td th:text="${lecture.professorname}"></td>
+						<td th:text="${lecture.timetable}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- Pagination -->
+		<div class="page-button-group">
+			<span th:if="${currentPage > 1}">
+				<button class="page-button-text"><a
+						th:href="@{/retrieve(page=${currentPage - 1}, size=${pageSize})}">이전</a></button>
+			</span>
+			<span th:each="pageNum : ${#numbers.sequence(1, totalPages)}">
+				<button class="page-button-num"><a th:href="@{/retrieve(page=${pageNum}, size=${pageSize})}"
+						th:text="${pageNum}"></a></button>
+			</span>
+			<span th:if="${currentPage < totalPages}">
+				<button class="page-button-text"><a
+						th:href="@{/retrieve(page=${currentPage + 1}, size=${pageSize})}">다음</a></button>
+			</span>
+		</div>
+
+
+
+
+	</th:block>
+</body>
+
+</html>

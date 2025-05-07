@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+   <th:block th:fragment="header">
+	<div class="container">
+			<div class="title-group">
+				<img src="/images/logo.jpg" alt="logo">
+				<div class="title"><a href="./">공주대학교 수강신청</a></div>
+			</div>
+			<div class="button-group">
+				<button class="button" th:onclick="|window.location.href='@{/}'|">공지사항</button>
+				<button class="button" th:onclick="|window.location.href='@{/retrieve}'|">조회</button>
+				<button class="button" th:onclick="|window.location.href='@{/register}'|">수강신청</button>
+				<button class="button" th:onclick="|window.location.href='@{/logout}'|">로그아웃</button>
+			</div>
+		</div>
+		<div id="blank1">
+		</div>
+   </th:block>
+</html>
